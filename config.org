@@ -18,6 +18,12 @@ Enable line numbers.
 #+end_src
 
 
+** Opacity
+
+#+begin_src emacs-lisp :tangle yes
+(doom/set-frame-opacity 98)
+#+end_src
+
 * Org mode
 
 ** Directory
