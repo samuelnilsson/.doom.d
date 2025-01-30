@@ -34,8 +34,6 @@ Enable line numbers.
       doom-emoji-font (font-spec :family "Noto Emoji")
       doom-serif-font (font-spec :family "Noto Serif" :size 16)
       doom-big-font (font-spec :family "Iosevka" :size 24))
-
-(set-face-attribute 'font-lock-keyword-face nil :weight 'normal)
 #+end_src
 
 *** Mixed pitch
