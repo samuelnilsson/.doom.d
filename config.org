@@ -56,4 +56,5 @@ Set directory for org files.
 
 #+begin_src emacs-lisp
 (setq org-directory "~/wiki/")
+(setq org-roam-directory "~/wiki/roam/")
 #+end_src
