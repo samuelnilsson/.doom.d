@@ -24,6 +24,30 @@ Enable line numbers.
 (doom/set-frame-opacity 98)
 #+end_src
 
+
+** Font
+
+*** Families
+
+#+begin_src emacs-lisp :tangle yes
+(setq doom-font (font-spec :family "Iosevka" :size 16)
+      doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16)
+      doom-symbol-font (font-spec :family "Symbols Nerd Font")
+      doom-emoji-font (font-spec :family "Noto Sans")
+      doom-serif-font (font-spec :family "Iosevka Etoile" :size 16)
+      doom-big-font (font-spec :family "Iosevka" :size 24))
+#+end_src
+
+*** Mixed pitch
+
+Enable mixed pitch for org-mode and markdown-mode, to have mono fonts for code and variable pitch font for text.
+
+#+begin_src emacs-lisp :tangle yes
+(setq +enabled-mixed-pitch-modes '(org-mode markdown-mode))
+(dolist (hook +enabled-mixed-pitch-modes)
+  (add-hook (intern (concat (symbol-name hook) "-hook")) #'mixed-pitch-mode))
+#+end_src
+
 * Org mode
 
 ** Directory
