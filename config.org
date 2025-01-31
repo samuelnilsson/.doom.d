@@ -56,3 +56,21 @@ Set directory for org files.
 (setq org-directory "~/wiki/")
 (setq org-roam-directory "~/wiki/roam/")
 #+end_src
+
+** Autosave
+
+Autosave org buffers to avoid syncthing conflicts.
+
+#+begin_src emacs-lisp :tangle yes
+(add-hook 'auto-save-hook 'org-save-all-org-buffers)
+#+end_src
+
+* Other
+
+** Revert buffer automatically
+
+Automatically revert a buffer when the underlying file changes on disk.
+
+#+begin_src emacs-lisp :tangle yes
+(global-auto-revert-mode 1)
+#+end_src
