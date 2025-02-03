@@ -74,6 +74,13 @@ Define org files to include in the agenda.
 (setq org-gtd-agenda-files (list "inbox.org" "gtd.org" "tickler.org" "someday.org"))
 #+end_src
 
+Set custom todo keywords.
+
+#+begin_src emacs-lisp
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "IN PROGRESS(i)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)")))
+#+end_src
+
 ** Autosave
 
 Autosave org buffers to avoid syncthing conflicts.
