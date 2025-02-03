@@ -57,6 +57,23 @@ Set directory for org files.
 (setq org-roam-directory "~/wiki/roam/")
 #+end_src
 
+** GTD
+
+*** Capture files
+
+#+begin_src emacs-lisp
+(setq +org-capture-todo-file "inbox.org")
+(setq +org-capture-projects-file "gtd.org")
+#+end_src
+
+*** Agenda files
+
+Define org files to include in the agenda.
+
+#+begin_src emacs-lisp
+(setq org-gtd-agenda-files (list "inbox.org" "gtd.org" "tickler.org" "someday.org"))
+#+end_src
+
 ** Autosave
 
 Autosave org buffers to avoid syncthing conflicts.
