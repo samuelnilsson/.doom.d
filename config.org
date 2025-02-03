@@ -78,7 +78,7 @@ Set custom todo keywords.
 
 #+begin_src emacs-lisp
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "IN PROGRESS(i)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)")))
+      '((sequence "TODO(t)" "PROG(i)" "WAIT(w)" "|" "DONE(d)" "CNCL(c)")))
 #+end_src
 
 ** Autosave
