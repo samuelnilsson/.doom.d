@@ -59,11 +59,12 @@ Set directory for org files.
 
 ** GTD
 
-*** Capture files
+*** Capture templates
 
 #+begin_src emacs-lisp
-(setq +org-capture-todo-file "inbox.org")
-(setq +org-capture-projects-file "gtd.org")
+(setq org-capture-templates
+      '(("t" "TODO" entry (file "inbox.org")
+         "* TODO %?\n%i\n%a" :prepend t)))
 #+end_src
 
 *** Agenda files
