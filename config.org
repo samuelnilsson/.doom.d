@@ -78,8 +78,9 @@ Define org files to include in the agenda.
 Set custom todo keywords.
 
 #+begin_src emacs-lisp
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "PROG(i)" "WAIT(w)" "|" "DONE(d)" "CNCL(c)")))
+(after! org
+    (setq org-todo-keywords '((sequence "TODO(t)" "PROG(i)" "WAIT(w)" "|" "DONE(d)" "CNCL(c)"))
+          org-todo-keywords-for-agenda '((sequence "TODO(t)" "PROG(i)" "WAIT(w)" "|" "DONE(d)" "CNCL(c)"))))
 #+end_src
 
 ** Autosave
