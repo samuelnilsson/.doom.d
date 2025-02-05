@@ -20,7 +20,7 @@ Enable line numbers.
 ** Opacity
 
 #+begin_src emacs-lisp :tangle yes
-(doom/set-frame-opacity 98)
+(add-to-list 'default-frame-alist '(alpha . 98))
 #+end_src
 
 ** Font
