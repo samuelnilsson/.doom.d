@@ -100,3 +100,14 @@ Automatically revert a buffer when the underlying file changes on disk.
 #+begin_src emacs-lisp :tangle yes
 (global-auto-revert-mode 1)
 #+end_src
+
+** SSH
+
+*** Tramp
+
+Make tramp find all executables on remote nixOS systems.
+
+#+begin_src emacs-lisp
+  (after! tramp
+    (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+#+end_src
