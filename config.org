@@ -28,12 +28,12 @@ Enable line numbers.
 *** Families
 
 #+begin_src emacs-lisp :tangle yes
-(setq doom-font (font-spec :family "Iosevka" :size 16)
-      doom-variable-pitch-font (font-spec :family "Noto Sans" :size 16)
+(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 16)
+      doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 16)
       doom-symbol-font (font-spec :family "Noto Sans Symbols")
       doom-emoji-font (font-spec :family "Noto Emoji")
-      doom-serif-font (font-spec :family "Noto Serif" :size 16)
-      doom-big-font (font-spec :family "Iosevka" :size 24))
+      doom-serif-font (font-spec :family "Iosevka Etoile" :size 16)
+      doom-big-font (font-spec :family "Iosevka Nerd Font" :size 24))
 #+end_src
 
 *** Mixed pitch
