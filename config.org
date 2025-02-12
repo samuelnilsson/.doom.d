@@ -119,4 +119,13 @@ Make tramp find all executables on remote nixOS systems.
 #+begin_src emacs-lisp
   (after! tramp
     (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+
+** Rest client
+
+#+begin_src emacs-lisp :tangle yes
+(use-package! verb
+    :hook
+    (verb-mode . (lambda () (setq-local network-stream-use-client-certificates t)))
+    :config
+    (setq verb-auto-kill-response-buffers t))
 #+end_src
