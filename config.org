@@ -23,6 +23,14 @@ Enable line numbers.
 (add-to-list 'default-frame-alist '(alpha . 98))
 #+end_src
 
+** Spacing
+
+Increase line spacing for some breathing room.
+
+#+begin_src emacs-lisp
+(setq-default line-spacing 3)
+#+end_src
+
 ** Font
 
 *** Families
