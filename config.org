@@ -100,6 +100,17 @@ Autosave org buffers to avoid syncthing conflicts.
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
 #+end_src
 
+* Keybindings
+
+** Mac
+
+Switch modifier keys on mac to be consistent with linux.
+
+#+begin_src emacs-lisp :tangle yes
+(setq mac-command-modifier 'control)
+(setq mac-control-modifier 'super)
+#+end_src
+
 * Other
 
 ** Revert buffer automatically
@@ -119,6 +130,7 @@ Make tramp find all executables on remote nixOS systems.
 #+begin_src emacs-lisp
   (after! tramp
     (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+#+end_src
 
 ** Rest client
 
