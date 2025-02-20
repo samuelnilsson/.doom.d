@@ -167,3 +167,14 @@ Setting /copilot-version/ to /nil/ makes copilot.el use the Microsoft official l
         ("c-tab" . 'copilot-accept-completion-by-word)
         ("c-<tab>" . 'copilot-accept-completion-by-word)))
 #+end_src
+
+** Spell checking
+
+Enable spell checking for both Swedish and English.
+
+#+begin_src emacs-lisp :tangle yes
+(after! ispell
+    (setq ispell-dictionary "en_US,sv_SE")
+    (ispell-set-spellchecker-params)
+    (ispell-hunspell-add-multi-dic "en_US,sv_SE"))
+#+end_src
