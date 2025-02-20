@@ -141,3 +141,20 @@ Make tramp find all executables on remote nixOS systems.
     :config
     (setq verb-auto-kill-response-buffers t))
 #+end_src
+
+** Copilot
+
+Enable copilot when enabled by the environment variable *DOOM_COPILOT_ENABLE*.
+Remap tab to prioritize copilot over corfu completion.
+
+#+begin_src emacs-lisp
+(use-package! copilot
+  :if (string-equal (getenv "DOOM_COPILOT_ENABLE") "t")
+  :hook (csharp-mode . copilot-mode)
+  :config (setq copilot-version nil)
+  :bind (:map copilot-completion-map
+        ("<tab>" . 'copilot-accept-completion)
+        ("tab" . 'copilot-accept-completion)
+        ("c-tab" . 'copilot-accept-completion-by-word)
+        ("c-<tab>" . 'copilot-accept-completion-by-word)))
+#+end_src
