@@ -135,8 +135,8 @@ Automatically revert a buffer when the underlying file changes on disk.
 Make tramp find all executables on remote nixOS systems.
 
 #+begin_src emacs-lisp
-  (after! tramp
-    (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+(after! tramp
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 #+end_src
 
 ** Rest client
