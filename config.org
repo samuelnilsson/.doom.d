@@ -4,8 +4,23 @@
 
 ** Theme
 
+Use doom-tokyo-night theme.
+
 #+begin_src emacs-lisp
 (setq doom-theme 'doom-tokyo-night)
+#+end_src
+
+*** Org mode
+
+Increase font size on org headers depending on header level.
+
+#+begin_src emacs-lisp
+(custom-theme-set-faces!
+    'doom-tokyo-night
+    '(org-level-3 :inherit outline-3 :height 1.2)
+    '(org-level-2 :inherit outline-2 :height 1.5)
+    '(org-level-1 :inherit outline-1 :height 1.75)
+    '(org-document-title :height 2.0 :underline "t"))
 #+end_src
 
 ** Window
