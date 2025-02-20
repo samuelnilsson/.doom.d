@@ -5,8 +5,7 @@
 ** Theme
 
 #+begin_src emacs-lisp
-(setq catppuccin-flavor 'macchiato)
-(setq doom-theme 'catppuccin)
+(setq doom-theme 'doom-tokyo-night)
 #+end_src
 
 ** Window
