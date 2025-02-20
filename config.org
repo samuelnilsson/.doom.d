@@ -147,6 +147,8 @@ Make tramp find all executables on remote nixOS systems.
 Enable copilot when enabled by the environment variable *DOOM_COPILOT_ENABLE*.
 Remap tab to prioritize copilot over corfu completion.
 
+Setting /copilot-version/ to nil makes copilot.el use microsofts official lsp for copilot.
+
 #+begin_src emacs-lisp
 (use-package! copilot
   :if (string-equal (getenv "DOOM_COPILOT_ENABLE") "t")
