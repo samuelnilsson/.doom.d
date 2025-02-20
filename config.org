@@ -1,6 +1,6 @@
-#+title: Config
+#+title: Configuration
 
-* UI
+* User interface
 
 ** Theme
 
@@ -122,7 +122,7 @@ Switch modifier keys on mac to be consistent with linux.
 
 ** Revert buffer automatically
 
-Automatically revert a buffer when the underlying file changes on disk.
+Always revert a buffer when the underlying file changes on disk.
 
 #+begin_src emacs-lisp :tangle yes
 (global-auto-revert-mode 1)
@@ -132,7 +132,7 @@ Automatically revert a buffer when the underlying file changes on disk.
 
 *** Tramp
 
-Make tramp find all executables on remote nixOS systems.
+Make tramp find all executable files in path on remote NixOS systems.
 
 #+begin_src emacs-lisp
 (after! tramp
