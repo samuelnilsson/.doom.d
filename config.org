@@ -193,3 +193,5 @@ Enable spell checking for both Swedish and English.
     (ispell-set-spellchecker-params)
     (ispell-hunspell-add-multi-dic "en_US,sv_SE"))
 #+end_src
+
+#  LocalWords:  lsp nixfmt
