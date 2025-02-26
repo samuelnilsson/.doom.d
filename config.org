@@ -149,6 +149,12 @@ Enable dict completion combined with dabbrev (completion from open buffers) in a
 (add-hook! text-mode (add-hook 'completion-at-point-functions (cape-capf-super #'cape-dabbrev #'cape-dict) 100 t))
 #+end_src
 
+Always use dabbrev as a last resort for programming modes.
+
+#+begin_src emacs-lisp :tangle yes
+(add-hook! prog-mode (add-hook 'completion-at-point-functions #'cape-dabbrev 100 t))
+#+end_src
+
 * Other
 
 ** Revert buffer automatically
