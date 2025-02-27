@@ -137,17 +137,15 @@ Switch modifier keys on mac to be consistent with Linux.
 ** Corfu
 *** Dict
 
-Set dictionary files used by cape dictionary completion. Complete both Swedish and english words.
-
-#+begin_src emacs-lisp :tangle yes
-(setq cape-dict-file (lambda () (list (getenv "DOOM_DICT_ENG") (getenv "DOOM_DICT_SWE"))))
-#+end_src
+The dictionary to use is determined by [[*Language detection][Language detection]].
 
 Enable dict completion combined with dabbrev (completion from open buffers) in all text writing modes.
 
 #+begin_src emacs-lisp :tangle yes
 (add-hook! text-mode (add-hook 'completion-at-point-functions (cape-capf-super #'cape-dabbrev #'cape-dict) 100 t))
 #+end_src
+
+*** Programming
 
 Always use dabbrev as a last resort for programming modes.
 
@@ -214,4 +212,35 @@ Enable spell checking for both Swedish and English.
     (setq ispell-dictionary "en_US,sv_SE")
     (ispell-set-spellchecker-params)
     (ispell-hunspell-add-multi-dic "en_US,sv_SE"))
+#+end_src
+
+*** Language detection
+
+To be able to switch between writing in English and Swedish seamlessly the language is detected automatically by using the guess-language package.
+It sets the correct dictionary to use for spell checking and completion depending on the language detected.
+
+Guess language mode is only activated for text modes.
+*guess-language-mode* makes sure that the correct dictionary file is used for spell checking.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package! guess-language
+  :hook (text-mode . guess-language-mode)
+  :config
+  (setq guess-language-languages '(en sv))
+  (setq guess-language-min-paragraph-length 35))
+  (setq guess-language-langcodes
+  '((en . ("en_US" "English" nil "English"))
+    (sv . ("sv_SE" "Swedish" nil "Swedish"))))
+#+end_src
+
+Hook into when a new language is detected and set the correct cape-dict file used depending on the language.
+
+#+begin_src emacs-lisp :tangle yes
+(defun set-cape-dict (lang beginning end)
+  (setq cape-dict-file  (pcase lang
+                          ('en (getenv "DOOM_DICT_ENG"))
+                          ('sv (getenv "DOOM_DICT_SWE"))
+                          )))
+
+(add-hook 'guess-language-after-detection-functions #'set-cape-dict)
 #+end_src
