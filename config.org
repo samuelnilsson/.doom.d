@@ -244,3 +244,5 @@ Hook into when a new language is detected and set the correct cape-dict file use
 
 (add-hook 'guess-language-after-detection-functions #'set-cape-dict)
 #+end_src
+
+#  LocalWords:  dabbrev
