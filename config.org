@@ -257,10 +257,10 @@ Hook into when a new language is detected and set the correct cape-dict file use
 
 Use mermaid tree-sitter mode for graphs/diagrams.
 
-
-
 #+begin_src emacs-lisp
-(use-package mermaid-ts-mode)
+(use-package! mermaid-mode)
+(use-package! mermaid-ts-mode
+  :hook (mermaid-mode . mermaid-ts-mode))
 #+end_src
 
 Enable executing mermaid from org src blocks.
@@ -272,5 +272,6 @@ Enable executing mermaid from org src blocks.
          '((mermaid . t)
            (scheme . t)
            ))
+  :config (setq ob-mermaid-cli-path (getenv "MMDC_PATH"))
   )
 #+end_src
