@@ -253,4 +253,24 @@ Hook into when a new language is detected and set the correct cape-dict file use
 (add-hook 'guess-language-after-detection-functions #'set-cape-dict)
 #+end_src
 
-#  LocalWords:  dabbrev
+** Graphs
+
+Use mermaid tree-sitter mode for graphs/diagrams.
+
+
+
+#+begin_src emacs-lisp
+(use-package mermaid-ts-mode)
+#+end_src
+
+Enable executing mermaid from org src blocks.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package ob-mermaid
+  :init (org-babel-do-load-languages
+         'org-babel-load-languages
+         '((mermaid . t)
+           (scheme . t)
+           ))
+  )
+#+end_src
