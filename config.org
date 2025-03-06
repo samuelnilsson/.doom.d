@@ -68,6 +68,14 @@ Enable mixed pitch for org-mode and markdown-mode, to have mono fonts for code a
   (add-hook (intern (concat (symbol-name hook) "-hook")) #'mixed-pitch-mode))
 #+end_src
 
+** Syntax
+*** Tree-sitter
+Use tree-sitter from /tree-sitter-langs/.
+
+#+begin_src emacs-lisp :tangle yes
+(setq! treesit-extra-load-path (getenv "TREESITTER_GRAMMARS"))
+#+end_src
+
 * Org mode
 
 ** Directory
