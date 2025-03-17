@@ -5,3 +5,5 @@
 (package! mermaid-mode)
 (package! mermaid-ts-mode)
 (package! ob-mermaid)
+(unless (string= "" (getenv "DOOM_CALDAV_SERVER"))
+  (package! org-caldav))

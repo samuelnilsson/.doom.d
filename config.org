@@ -103,7 +103,7 @@ Set directory for org files.
 Define org files to include in the agenda.
 
 #+begin_src emacs-lisp
-(setq org-gtd-agenda-files (list "inbox.org" "gtd.org" "tickler.org" "someday.org"))
+(setq org-gtd-agenda-files (list "inbox.org" "gtd.org" "tickler.org" "someday.org" "tickler-calendar.org"))
 #+end_src
 
 Set custom todo keywords.
@@ -128,6 +128,25 @@ Hide emphasis markers, such as markers for bold and cursive text.
 
 #+begin_src emacs-lisp :tangle yes
 (setq org-hide-emphasis-markers "t")
+#+end_src
+
+** Calendar
+
+Sync caldav calendar to org.
+The /org-caldav-sync/ interactive function is used to sync new calendars to the /org-caldav-inbox/ file.
+
+Setting /org-caldav-sync-direction/ makes sure that the calendar is only synced one way, since I only use caldav for planning, not to create or edit events.
+
+#+begin_src emacs-lisp :tangle yes
+(unless (string= "" (getenv "DOOM_CALDAV_SERVER"))
+  (use-package! org-caldav
+    :config
+    (setq org-caldav-url (getenv "DOOM_CALDAV_SERVER"))
+    (setq org-caldav-calendar-id (getenv "DOOM_CALDAV_CALENDAR_ID"))
+    (setq org-caldav-inbox "~/wiki/tickler-calendar.org")
+    (setq org-caldav-uuid-extension ".EML")
+    (setq org-caldav-files nil)
+    (setq org-caldav-sync-direction 'cal->org)))
 #+end_src
 
 * Keybindings
