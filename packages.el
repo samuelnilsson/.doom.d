@@ -7,3 +7,5 @@
 (package! ob-mermaid)
 (unless (string= "" (getenv "DOOM_CALDAV_SERVER"))
   (package! org-caldav))
+(unless (string= "" (getenv "DOOM_JIRA_URL"))
+  (package! org-jira))

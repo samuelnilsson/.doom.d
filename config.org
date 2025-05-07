@@ -161,6 +161,24 @@ Add a timestamp to the header of newly captured entries in org-roam daily journa
          :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
 #+end_src
 
+** Jira
+
+Using jira in org-mode is more fun.
+
+#+begin_src emacs-lisp :tangle yes
+(unless (string= "" (getenv "DOOM_JIRA_URL"))
+  (use-package! org-jira
+    :config
+    (setq jiralib-url (getenv "DOOM_JIRA_URL"))
+    (setq jiralib-user (getenv "DOOM_JIRA_USER"))
+    (let ((dir "~/.org-jira"))
+      (unless (file-exists-p dir)
+        (make-directory dir t)))
+    (let ((extra-config (message (nth 0 (split-string (getenv "DOOM_JIRA_EXTRA_CONF") ":")))))
+      (when (file-exists-p extra-config)
+        (load-file extra-config)))))
+#+end_src
+
 * Keybindings
 
 ** Mac
