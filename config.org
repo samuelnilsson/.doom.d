@@ -149,6 +149,18 @@ Setting /org-caldav-sync-direction/ makes sure that the calendar is only synced 
     (setq org-caldav-sync-direction 'cal->org)))
 #+end_src
 
+** Roam
+
+*** Dailies
+
+Add a timestamp to the header of newly captured entries in org-roam daily journals.
+
+#+begin_src emacs-lisp :tangle yes
+(setq org-roam-dailies-capture-templates
+      '(("d" "default" entry "* %<%H:%M> %?"
+         :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+#+end_src
+
 * Keybindings
 
 ** Mac
