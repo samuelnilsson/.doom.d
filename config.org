@@ -237,8 +237,6 @@ Setting /copilot-version/ to /nil/ makes copilot.el use the Microsoft official l
   :config (setq copilot-version nil)
   :bind (:map copilot-completion-map
         ("<tab>" . 'copilot-accept-completion)
-        ("tab" . 'copilot-accept-completion)
-        ("c-tab" . 'copilot-accept-completion-by-word)
         ("c-<tab>" . 'copilot-accept-completion-by-word)))
 #+end_src
 
