@@ -114,6 +114,16 @@ Set custom todo keywords.
           org-todo-keywords-for-agenda '((sequence "TODO(t)" "PROG(i)" "WAIT(w)" "|" "DONE(d)" "CNCL(c)"))))
 #+end_src
 
+*** Todo list
+
+Filter out dates with timestamps in todo list. They are only relevant in agenda view.
+
+#+begin_src emacs-lisp :tangle yes
+(setq org-agenda-todo-ignore-deadlines "t")
+(setq org-agenda-todo-ignore-scheduled "t")
+(setq org-agenda-todo-ignore-timestamp "t")
+#+end_src
+
 ** Auto save
 
 Auto save org buffers to avoid syncthing conflicts.
@@ -158,7 +168,7 @@ Add a timestamp to the header of newly captured entries in org-roam daily journa
 #+begin_src emacs-lisp :tangle yes
 (setq org-roam-dailies-capture-templates
       '(("d" "default" entry "* %<%H:%M> %?"
-         :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+         :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n")))
 #+end_src
 
 ** Jira
