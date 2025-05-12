@@ -116,12 +116,44 @@ Set custom todo keywords.
 
 *** Todo list
 
-Filter out dates with timestamps in todo list. They are only relevant in agenda view.
+Display the parent headers of each item (%b as in breadcrumbs).
 
 #+begin_src emacs-lisp :tangle yes
-(setq org-agenda-todo-ignore-deadlines "t")
-(setq org-agenda-todo-ignore-scheduled "t")
-(setq org-agenda-todo-ignore-timestamp "t")
+(setq org-agenda-prefix-format
+      '((agenda . " %i %?-12t% s %b ")
+        (todo . " %i %b ")
+        (tags . " %i %b ")
+        (search . " %i %-12:c")))
+#+end_src
+
+*** Org super agenda
+
+Use org-super-agenda to put the most important TODO items in groups.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package! org-super-agenda
+  :config
+  (setq org-super-agenda-groups
+        '((:name "Overdue"
+           :deadline past
+           :order 0)
+          (:name "Due today"
+           :deadline today
+           :order 1)
+          (:name "Start Today"
+           :scheduled today
+           :order 2)
+          (:name "In progress"
+           :todo "PROG"
+           :order 3)
+          (:name "Next up"
+           :take (7 (:and (:todo "TODO"
+                           :priority>= "B")))
+           :order 4)
+          (:name "Waiting"
+           :todo "WAIT"
+           :order 5)))
+  (org-super-agenda-mode))
 #+end_src
 
 ** Auto save
