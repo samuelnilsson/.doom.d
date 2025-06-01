@@ -23,6 +23,15 @@ Increase font size on org headers depending on header level.
     '(org-document-title :height 2.0 :underline "t"))
 #+end_src
 
+*** Custom colors
+
+Colorize the type-face since it was white as default..
+
+#+begin_src emacs-lisp :tangle yes
+(custom-set-faces!
+  `(font-lock-type-face :foreground ,(doom-color 'magenta)))
+#+end_src
+
 ** Window
 
 Enable line numbers.
@@ -58,7 +67,7 @@ Increase line spacing for some breathing room.
       doom-big-font (font-spec :family "Monaspace Neon Frozen" :size 24))
 #+end_src
 
-*** Faces
+*** Fonts for faces
 Use some fun/quirky fonts for specific faces, for eye candy and to distinguish faces.
 - "Machine-like" font for copilot.
 - "Hand-written" font for comments.
