@@ -98,6 +98,12 @@ Use tree-sitter from /tree-sitter-langs/.
 (setq! treesit-extra-load-path (list (getenv "TREESITTER_GRAMMARS")))
 #+end_src
 
+Use a higher decoration level.
+
+#+begin_src emacs-lisp :tangle yes
+(setq treesit-font-lock-level 4)
+#+end_src
+
 * Org mode
 
 ** Directory
