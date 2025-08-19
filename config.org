@@ -200,6 +200,17 @@ Hide emphasis markers, such as markers for bold and cursive text.
 (setq org-hide-emphasis-markers "t")
 #+end_src
 
+Remove some org modern features that I think is just distracting and looks bad with my font.
+
+#+begin_src emacs-lisp :tangle yes
+(setq org-modern-timestamp nil
+      org-modern-tag nil
+      org-modern-table nil
+      org-modern-todo nil
+      org-modern-priority nil
+      org-modern-checkbox nil)
+#+end_src
+
 ** Caldav
 
 Sync caldav calendar to org.
