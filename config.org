@@ -184,6 +184,14 @@ Use org-super-agenda to put the most important TODO items in groups.
   (org-super-agenda-mode))
 #+end_src
 
+*** Keybindings
+
+Use consult-org-agenda for searching agenda headers. It is faster and integrates with embark.
+
+#+begin_src emacs-lisp :tangle yes
+(map! :leader "nS" #'consult-org-agenda)
+#+end_src
+
 ** Auto save
 
 Auto save org buffers to avoid syncthing conflicts.
