@@ -299,6 +299,59 @@ Always use dabbrev as a last resort for programming modes.
 (add-hook! prog-mode (add-hook 'completion-at-point-functions #'cape-dabbrev 100 t))
 #+end_src
 
+* AI
+** Completion
+
+Enable copilot when enabled by the environment variable *DOOM_COPILOT_ENABLE*.
+Remap tab to prioritize copilot over /corfu/ completion.
+
+Setting /copilot-version/ to /nil/ makes copilot.el use the Microsoft official language server protocol for copilot.
+
+#+begin_src emacs-lisp
+(use-package! copilot
+  :if (string-equal (getenv "DOOM_COPILOT_ENABLE") "t")
+  :hook (csharp-mode . copilot-mode)
+  :config (setq copilot-version nil)
+  :bind (:map copilot-completion-map
+        ("<tab>" . 'copilot-accept-completion)
+        ("TAB" . 'copilot-accept-completion)))
+#+end_src
+
+** Chat
+
+*** gptel
+
+Use gptel to interact with ollama language models.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package! gptel
+  :if (string-equal (getenv "DOOM_GPTEL_ENABLE") "t")
+  :demand t
+  :preface
+  (defun gptel-for-readme ()
+    (setq-local gptel-backend (gptel-get-backend "Ollama"))
+    (setq-local gptel-model 'deepseek-r1:32b)
+    (setq-local gptel-system
+                "You are a crisp technical writer. Output clean Markdown with short sections, bullet lists, and examples. Prefer active voice."))
+
+  (defun gptel-for-programming ()
+    (setq-local gptel-backend (gptel-get-backend "Ollama"))
+    (setq-local gptel-model 'codellama:34b)
+    (setq-local gptel-system
+                "You are a careful programmer. Show minimal runnable code with comments. Note assumptions, complexity, and edge cases. Provide tests when useful."))
+
+  :hook ((prog-mode . gptel-for-programming)
+         (markdown-mode . gptel-for-readme)
+         (org-mode . gptel-for-readme))
+  :config
+  (setq gptel-model 'deepseek-r1:32b
+        gptel-default-mode #'org-mode)
+  (gptel-make-ollama "Ollama"
+    :host "localhost:11434"
+    :stream t
+    :models '(deepseek-r1:32b codellama:34b)))
+#+end_src
+
 * Other
 
 ** Revert buffer automatically
@@ -328,23 +381,6 @@ Make tramp find all executable files in path on remote NixOS systems.
     (verb-mode . (lambda () (setq-local network-stream-use-client-certificates t)))
     :config
     (setq verb-auto-kill-response-buffers t))
-#+end_src
-
-** Copilot
-
-Enable copilot when enabled by the environment variable *DOOM_COPILOT_ENABLE*.
-Remap tab to prioritize copilot over /corfu/ completion.
-
-Setting /copilot-version/ to /nil/ makes copilot.el use the Microsoft official language server protocol for copilot.
-
-#+begin_src emacs-lisp
-(use-package! copilot
-  :if (string-equal (getenv "DOOM_COPILOT_ENABLE") "t")
-  :hook (csharp-mode . copilot-mode)
-  :config (setq copilot-version nil)
-  :bind (:map copilot-completion-map
-        ("<tab>" . 'copilot-accept-completion)
-        ("c-<tab>" . 'copilot-accept-completion-by-word)))
 #+end_src
 
 ** Spell checking
