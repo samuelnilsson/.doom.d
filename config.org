@@ -25,8 +25,6 @@ Increase font size on org headers depending on header level.
 
 *** Custom colors
 
-Colorize the type-face since it was white as default..
-
 #+begin_src emacs-lisp :tangle yes
 (custom-set-faces!
   `(font-lock-type-face :foreground ,(doom-color 'magenta)))
@@ -59,25 +57,12 @@ Increase line spacing for some breathing room.
 *** Families
 
 #+begin_src emacs-lisp :tangle yes
-(setq doom-font (font-spec :family "Monaspace Neon Frozen" :size 16)
-      doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 16)
+(setq doom-font (font-spec :family "Iosevka" :size 18)
+      doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 18)
       doom-symbol-font (font-spec :family "Noto Sans Symbols")
       doom-emoji-font (font-spec :family "Noto Emoji")
-      doom-serif-font (font-spec :family "IBM Plex Serif" :size 16)
-      doom-big-font (font-spec :family "Monaspace Neon Frozen" :size 24))
-#+end_src
-
-*** Fonts for faces
-Use some fun/quirky fonts for specific faces, for eye candy and to distinguish faces.
-- "Machine-like" font for copilot.
-- "Hand-written" font for comments.
-- "Professional" font for documentation.
-
-#+begin_src emacs-lisp :tangle yes
-(custom-set-faces!
-  '(copilot-overlay-face :family "Monaspace Krypton Frozen")
-  '(font-lock-comment-face :family "Monaspace Radon Frozen")
-  '(font-lock-doc-face :family "Monaspace Xenon Frozen"))
+      doom-serif-font (font-spec :family "Iosevka Etoile" :size 18)
+      doom-big-font (font-spec :family "Iosevka" :size 24))
 #+end_src
 
 *** Mixed pitch
@@ -319,7 +304,7 @@ Tables won't align when not using a monospace font.
 
 #+begin_src emacs-lisp :tangle yes
 (custom-set-faces!
-  '(markdown-table-face :family "Monaspace Neon Frozen"))
+  '(markdown-table-face :family "Iosevka"))
 #+end_src
 
 * AI
