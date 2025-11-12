@@ -32,10 +32,10 @@ Increase font size on org headers depending on header level.
 
 ** Window
 
-Enable line numbers.
+Disable line numbers.
 
 #+begin_src emacs-lisp
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type nil)
 #+end_src
 
 ** Opacity
