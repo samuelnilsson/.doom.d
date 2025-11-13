@@ -12,3 +12,5 @@
   (package! org-jira))
 (package! gptel :recipe (:nonrecursive t))
 (package! catppuccin-theme)
+(package! mpv)
+(package! elfeed-tube-mpv)
