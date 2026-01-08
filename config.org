@@ -147,7 +147,7 @@ Use org-super-agenda to put the most important TODO items in groups.
 (use-package! org-super-agenda
   :config
   (setq org-super-agenda-groups
-        '((:name "Overdue"
+        `((:name "Overdue"
            :deadline past
            :order 0)
           (:name "Due today"
@@ -159,13 +159,16 @@ Use org-super-agenda to put the most important TODO items in groups.
           (:name "In progress"
            :todo "PROG"
            :order 3)
+          (:name "Due upcoming week"
+           :deadline (before ,(org-read-date nil nil "+1w"))
+           :order 4)
           (:name "Next up"
            :take (7 (:and (:todo "TODO"
                            :priority>= "B")))
-           :order 4)
+           :order 5)
           (:name "Waiting"
            :todo "WAIT"
-           :order 5)))
+           :order 6)))
   (org-super-agenda-mode))
 #+end_src
 
