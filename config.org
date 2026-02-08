@@ -106,9 +106,15 @@ Set directory for org files.
 
 #+begin_src emacs-lisp
 (after! org
-    (setq org-capture-templates
-          '(("t" "TODO" entry (file "inbox.org")
-             "* TODO %?\n%i\n%a" :prepend t))))
+  (setq org-capture-templates
+        `(("t" "TODO" entry (file "inbox.org")
+           "* TODO %?\n%i\n%a" :prepend t)
+          ("b" "Web bookmark" entry
+           (file+headline ,(expand-file-name "bookmarks.org" org-roam-directory) "Bookmarks")
+           "** %:description\n:PROPERTIES:\n:URL: %:link\n:END:\n%U\n\n%i\n\n%?\n"))))
+
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "qutebrowser")
 #+end_src
 
 *** Agenda files
