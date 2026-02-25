@@ -316,6 +316,17 @@ Tables won't align when not using a monospace font.
   '(markdown-table-face :family "Iosevka"))
 #+end_src
 
+** Dotnet/C#
+
+Use xml-mode for "project files".
+
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'auto-mode-alist '("\\.csproj\\'" . xml-mode))
+(add-to-list 'auto-mode-alist '("\\.props\\'" . xml-mode))
+(add-to-list 'auto-mode-alist '("\\.targets\\'" . xml-mode))
+(add-to-list 'auto-mode-alist '("\\.slnx\\'" . xml-mode))
+#+end_src
+
 * AI
 ** Completion
 
