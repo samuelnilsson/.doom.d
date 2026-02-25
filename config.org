@@ -338,7 +338,7 @@ Setting /copilot-version/ to /nil/ makes copilot.el use the Microsoft official l
 #+begin_src emacs-lisp
 (use-package! copilot
   :if (string-equal (getenv "DOOM_COPILOT_ENABLE") "t")
-  :hook (csharp-mode . copilot-mode)
+  :hook (csharp-ts-mode . copilot-mode)
   :config (setq copilot-version nil)
   :bind (:map copilot-completion-map
         ("<tab>" . 'copilot-accept-completion)
