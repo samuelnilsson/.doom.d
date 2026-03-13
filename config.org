@@ -424,7 +424,10 @@ Use gptel to interact with ollama language models.
 
 #+begin_src emacs-lisp :tangle yes
 (use-package! gptel-magit
-  :hook (magit-mode . gptel-magit-install))
+  :after gptel
+  :hook (magit-mode . gptel-magit-install)
+  :config (setq gptel-magit-model 'gemini-3-flash-preview
+                gptel-magit-backend (gptel-get-backend "Copilot")))
 #+end_src
 
 * Other
