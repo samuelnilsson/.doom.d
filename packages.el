@@ -14,3 +14,4 @@
 (package! catppuccin-theme)
 (package! mpv)
 (package! elfeed-tube-mpv)
+(package! gptel-magit)

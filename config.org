@@ -345,9 +345,9 @@ Setting /copilot-version/ to /nil/ makes copilot.el use the Microsoft official l
         ("TAB" . 'copilot-accept-completion)))
 #+end_src
 
-** Chat
+** Gptel
 
-*** gptel
+*** Backends and models
 
 Use gptel to interact with ollama language models.
 
@@ -370,19 +370,25 @@ Use gptel to interact with ollama language models.
 
   (defun gptel-for-readme-gh ()
     (setq-local gptel-backend (gptel-get-backend "Copilot"))
-    (setq-local gptel-model 'gpt-5-mini)
+    (setq-local gptel-model 'gemini-3-pro-preview)
+    (setq-local gptel-system
+                "You are a crisp technical writer. Output clean Markdown with short sections, bullet lists, and examples. Prefer active voice."))
+  
+  (defun gptel-for-org-gh ()
+    (setq-local gptel-backend (gptel-get-backend "Copilot"))
+    (setq-local gptel-model 'gemini-3-pro-preview)
     (setq-local gptel-system
                 "You are a crisp technical writer. Output clean Markdown with short sections, bullet lists, and examples. Prefer active voice."))
   
   (defun gptel-for-programming-gh ()
     (setq-local gptel-backend (gptel-get-backend "Copilot"))
-    (setq-local gptel-model 'gpt-5.2)
+    (setq-local gptel-model 'gemini-3-pro-preview)
     (setq-local gptel-system
                 "You are a careful programmer. Show minimal runnable code with comments. Note assumptions, complexity, and edge cases. Provide tests when useful."))
 
   :hook ((prog-mode . gptel-for-programming-gh)
          (markdown-mode . gptel-for-readme-gh)
-         (org-mode . gptel-for-readme))
+         (org-mode . gptel-for-readme-gh))
   :config
   (gptel-make-ollama "Ollama"
     :host "localhost:11434"
@@ -392,6 +398,33 @@ Use gptel to interact with ollama language models.
   (setq gptel-model 'gpt-5-mini
         gptel-backend (gptel-get-backend "Copilot")
         gptel-default-mode #'org-mode)
+#+end_src
+
+*** Key mappings
+
+#+begin_src emacs-lisp :tangle yes
+(map! :leader
+      (:prefix ("o l" . "llm")
+       :desc "Start chat"          "l" #'gptel
+       :desc "Send to LLM"         "s" #'gptel-send
+       :desc "Menu"                "m" #'gptel-menu
+       :desc "Rewrite region"      "r" #'gptel-rewrite
+       :desc "Abort stream"        "x" #'gptel-abort
+       
+       (:prefix ("c" . "context")
+        :desc "Add context (DWIM)" "c" #'gptel-add
+        :desc "Add file"           "f" #'gptel-add-file)
+
+       (:prefix ("o" . "org-mode")
+        :desc "Set topic"          "t" #'gptel-org-set-topic
+        :desc "Set properties"     "p" #'gptel-org-set-properties)))
+#+end_src
+
+*** Generate git commit messages
+
+#+begin_src emacs-lisp :tangle yes
+(use-package! gptel-magit
+  :hook (magit-mode . gptel-magit-install))
 #+end_src
 
 * Other
