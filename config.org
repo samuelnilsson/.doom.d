@@ -353,51 +353,50 @@ Use gptel to interact with ollama language models.
 
 #+begin_src emacs-lisp :tangle yes
 (use-package! gptel
-  :if (string-equal (getenv "DOOM_GPTEL_ENABLE") "t")
   :demand t
   :preface
-  (defun gptel-for-readme ()
+  (defun gptel-for-text ()
     (setq-local gptel-backend (gptel-get-backend "Ollama"))
-    (setq-local gptel-model 'deepseek-r1:32b)
+    (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
+        (setq-local gptel-model 'qwen3-next:latest))
+    (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
+        (setq-local gptel-model 'phi4-mini:latest))
     (setq-local gptel-system
                 "You are a crisp technical writer. Output clean Markdown with short sections, bullet lists, and examples. Prefer active voice."))
-
+  
   (defun gptel-for-programming ()
     (setq-local gptel-backend (gptel-get-backend "Ollama"))
-    (setq-local gptel-model 'codellama:34b)
+    (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
+        (setq-local gptel-model 'qwen3-coder-next:latest))
+    (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
+        (setq-local gptel-model 'qwen2.5-coder:3b))
     (setq-local gptel-system
                 "You are a careful programmer. Show minimal runnable code with comments. Note assumptions, complexity, and edge cases. Provide tests when useful."))
 
-  (defun gptel-for-readme-gh ()
-    (setq-local gptel-backend (gptel-get-backend "Copilot"))
-    (setq-local gptel-model 'gemini-3-pro-preview)
-    (setq-local gptel-system
-                "You are a crisp technical writer. Output clean Markdown with short sections, bullet lists, and examples. Prefer active voice."))
-  
-  (defun gptel-for-org-gh ()
-    (setq-local gptel-backend (gptel-get-backend "Copilot"))
-    (setq-local gptel-model 'gemini-3-pro-preview)
-    (setq-local gptel-system
-                "You are a crisp technical writer. Output clean Markdown with short sections, bullet lists, and examples. Prefer active voice."))
-  
-  (defun gptel-for-programming-gh ()
-    (setq-local gptel-backend (gptel-get-backend "Copilot"))
-    (setq-local gptel-model 'gemini-3-pro-preview)
-    (setq-local gptel-system
-                "You are a careful programmer. Show minimal runnable code with comments. Note assumptions, complexity, and edge cases. Provide tests when useful."))
-
-  :hook ((prog-mode . gptel-for-programming-gh)
-         (markdown-mode . gptel-for-readme-gh)
-         (org-mode . gptel-for-readme-gh))
+  :hook ((prog-mode . gptel-for-programming)
+         (markdown-mode . gptel-for-text)
+         (org-mode . gptel-for-text))
   :config
-  (gptel-make-ollama "Ollama"
-    :host "localhost:11434"
-    :stream t
-    :models '(deepseek-r1:32b codellama:34b)))
-  (gptel-make-gh-copilot "Copilot")
-  (setq gptel-model 'gpt-5-mini
-        gptel-backend (gptel-get-backend "Copilot")
-        gptel-default-mode #'org-mode)
+  (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
+      (progn
+        (gptel-make-ollama "Ollama"
+          :host "localhost:11434"
+          :stream t
+          :models '(qwen3-coder-next:latest qwen3-next:latest))
+        (gptel-make-gh-copilot "Copilot")))
+  (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
+      (gptel-make-ollama "Ollama"
+        :host "localhost:11434"
+        :stream t
+        :models '(qwen2.5-coder:3b phi4-mini:latest)))
+  (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
+      (setq gptel-model 'qwen3-coder-next:latest
+            gptel-backend (gptel-get-backend "Ollama")
+            gptel-default-mode #'org-mode))
+  (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
+      (setq gptel-model 'qwen2.5-coder:3b
+            gptel-backend (gptel-get-backend "Ollama")
+            gptel-default-mode #'org-mode)))
 #+end_src
 
 *** Key mappings
@@ -424,11 +423,14 @@ Use gptel to interact with ollama language models.
 
 #+begin_src emacs-lisp :tangle yes
 (use-package! gptel-magit
-  :if (string-equal (getenv "DOOM_GPTEL_ENABLE") "t")
   :after gptel
   :hook (magit-mode . gptel-magit-install)
-  :config (setq gptel-magit-model 'gemini-3-flash-preview
-                gptel-magit-backend (gptel-get-backend "Copilot")))
+  :config
+  (setq gptel-magit-backend (gptel-get-backend "Ollama"))
+  (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
+        (setq gptel-magit-model 'qwen3-coder-next:latest))
+  (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
+        (setq gptel-magit-model 'qwen2.5-coder:3b)))
 #+end_src
 
 * Other
