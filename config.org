@@ -574,3 +574,12 @@ Set monday as first day of week to display in calendar.
 #+begin_src emacs-lisp :tangle yes
 (setq rmh-elfeed-org-files '( "~/wiki/elfeed.org" ))
 #+end_src
+** Version control
+
+*** Commit messages
+
+Most commit messages are longer than the default 50.
+
+#+begin_src emacs-lisp :tangle yes
+(setq git-commit-summary-max-length 100)
+#+end_src
