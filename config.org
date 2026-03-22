@@ -393,12 +393,10 @@ Use gptel to interact with ollama language models.
         :models '(qwen2.5-coder:3b phi4-mini:latest)))
   (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
       (setq gptel-model 'qwen3-coder-next:latest
-            gptel-backend (gptel-get-backend "Ollama")
-            gptel-default-mode #'org-mode))
+            gptel-backend (gptel-get-backend "Ollama")))
   (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
       (setq gptel-model 'qwen2.5-coder:3b
-            gptel-backend (gptel-get-backend "Ollama")
-            gptel-default-mode #'org-mode)))
+            gptel-backend (gptel-get-backend "Ollama"))))
 #+end_src
 
 *** Key mappings
