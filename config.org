@@ -377,6 +377,8 @@ Use gptel to interact with ollama language models.
          (markdown-mode . gptel-for-text)
          (org-mode . gptel-for-text))
   :config
+  (setq gptel-send-media t
+        gptel-default-mode #'org-mode)
   (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
       (progn
         (gptel-make-ollama "Ollama"
