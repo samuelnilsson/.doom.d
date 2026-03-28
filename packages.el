@@ -11,6 +11,7 @@
 (unless (string= "" (getenv "DOOM_JIRA_URL"))
   (package! org-jira))
 (package! gptel :recipe (:nonrecursive t))
+(package! mcp)
 (package! catppuccin-theme)
 (package! mpv)
 (package! elfeed-tube-mpv)
