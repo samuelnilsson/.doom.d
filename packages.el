@@ -12,6 +12,8 @@
   (package! org-jira))
 (package! gptel :recipe (:nonrecursive t))
 (package! mcp)
+(package! gptel-agent
+  :recipe (:host github :repo "karthink/gptel-agent"))
 (package! catppuccin-theme)
 (package! mpv)
 (package! elfeed-tube-mpv)
