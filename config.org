@@ -443,6 +443,21 @@ require network access and credentials only available on that machine.
         :desc "Set properties"     "p" #'gptel-org-set-properties)))
 #+end_src
 
+*** Agent
+
+Load gptel-agent for agentic LLM sessions with tool use. =gptel-agent-update= reads
+the tool/agent definition files bundled with the package.
+
+Use =M-x gptel-agent= to open a dedicated agent session, or include =@gptel-agent=
+in any prompt to invoke it inline.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package! gptel-agent
+  :after gptel
+  :config
+  (gptel-agent-update))
+#+end_src
+
 *** Generate git commit messages
 
 #+begin_src emacs-lisp :tangle yes

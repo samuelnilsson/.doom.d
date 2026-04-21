@@ -16,4 +16,5 @@
 (package! mpv)
 (package! elfeed-tube-mpv)
 (package! gptel-magit)
+(package! gptel-agent)
 (package! minuet)
