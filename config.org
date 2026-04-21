@@ -415,11 +415,10 @@ require network access and credentials only available on that machine.
                               :roots ("~/src" "~/Downloads" "~/.doom.d")))
              ("fetch" . (:command "uvx" :args ("mcp-server-fetch")))
              ,@(when (string-equal (getenv "DOOM_GPTEL_MAC") "t")
-                 '(("atlassian-rovo" . (:command "npx"
+                 `(("atlassian-rovo" . (:command "npx"
                                         :args ("-y" "mcp-remote@latest" "https://mcp.atlassian.com/v1/mcp")))
                    ("github" . (:command "npx"
-                                :args ("-y" "@modelcontextprotocol/server-github")
-                                :env (:GITHUB_PERSONAL_ACCESS_TOKEN ,(string-trim (shell-command-to-string "gh auth token")))))))))
+                                :args ("-y" "mcp-remote@latest" "https://api.githubcopilot.com/mcp" "--header" ,(concat "Authorization: Bearer " (string-trim (shell-command-to-string "gh auth token"))))))))))
   :config (require 'mcp-hub)
   :hook (after-init . mcp-hub-start-all-server))
 #+end_src
