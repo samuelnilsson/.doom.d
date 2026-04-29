@@ -446,7 +446,12 @@ require network access and credentials only available on that machine.
 
        (:prefix ("o" . "org-mode")
         :desc "Set topic"          "t" #'gptel-org-set-topic
-        :desc "Set properties"     "p" #'gptel-org-set-properties)))
+        :desc "Set properties"     "p" #'gptel-org-set-properties)
+
+       (:prefix ("a" . "agent")
+        :desc "Open agent session" "a" #'gptel-agent
+        :desc "Compact"            "c" #'gptel-agent-compact
+        :desc "Toggle todos"       "t" #'gptel-agent-toggle-todos)))
 #+end_src
 
 *** Agent
