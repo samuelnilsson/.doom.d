@@ -466,11 +466,15 @@ in any prompt to invoke it inline.
 
 *** Generate git commit messages
 
+Use =gptel-magit= to generate commit messages from the staged diff. The default prompt is based on Conventional Commits, patched to allow subject lines up to 100 characters (matching =git-commit-summary-max-length=).
+
 #+begin_src emacs-lisp :tangle yes
 (use-package! gptel-magit
   :after gptel
   :hook (magit-mode . gptel-magit-install)
   :config
+  (setq gptel-magit-commit-prompt
+        (replace-regexp-in-string "60 characters" "100 characters" gptel-magit-prompt-conventional-commits))
   (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
       (setq gptel-magit-backend (gptel-get-backend "Copilot")
             gptel-magit-model 'claude-sonnet-4.6))
