@@ -346,27 +346,33 @@ Setting /copilot-version/ to /nil/ makes copilot.el use the Microsoft official l
 
 *** Backends and models
 
-Use gptel to interact with llama-swap language models.
+Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilot with Claude Sonnet 4.6 as the default.
 
 #+begin_src emacs-lisp :tangle yes
 (use-package! gptel
   :demand t
   :preface
   (defun gptel-for-text ()
-    (setq-local gptel-backend (gptel-get-backend "llama-swap"))
     (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
-        (setq-local gptel-model 'qwen3.5-35b))
+        (progn
+          (setq-local gptel-backend (gptel-get-backend "Copilot"))
+          (setq-local gptel-model 'claude-sonnet-4.6)))
     (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
-        (setq-local gptel-model 'qwen3.5-4b))
+        (progn
+          (setq-local gptel-backend (gptel-get-backend "llama-swap"))
+          (setq-local gptel-model 'qwen3.5-4b)))
     (setq-local gptel-system
                 "You are a crisp technical writer. Output clean Markdown with short sections, bullet lists, and examples. Prefer active voice."))
   
   (defun gptel-for-programming ()
-    (setq-local gptel-backend (gptel-get-backend "llama-swap"))
     (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
-        (setq-local gptel-model 'qwen3.5-35b))
+        (progn
+          (setq-local gptel-backend (gptel-get-backend "Copilot"))
+          (setq-local gptel-model 'claude-sonnet-4.6)))
     (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
-        (setq-local gptel-model 'qwen3.5-4b))
+        (progn
+          (setq-local gptel-backend (gptel-get-backend "llama-swap"))
+          (setq-local gptel-model 'qwen3.5-4b)))
     (setq-local gptel-system
                 "You are a careful programmer. Show minimal runnable code with comments. Note assumptions, complexity, and edge cases. Provide tests when useful."))
 
@@ -392,8 +398,8 @@ Use gptel to interact with llama-swap language models.
             :stream t
             :models '(qwen3.5-4b)))
   (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
-      (setq gptel-model 'qwen3.5-35b
-            gptel-backend (gptel-get-backend "llama-swap")))
+      (setq gptel-model 'claude-sonnet-4.6
+            gptel-backend (gptel-get-backend "Copilot")))
   (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
       (setq gptel-model 'qwen3.5-4b
             gptel-backend (gptel-get-backend "llama-swap"))))
@@ -465,11 +471,12 @@ in any prompt to invoke it inline.
   :after gptel
   :hook (magit-mode . gptel-magit-install)
   :config
-  (setq gptel-magit-backend (gptel-get-backend "llama-swap"))
   (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
-        (setq gptel-magit-model 'qwen3.5-9b))
+      (setq gptel-magit-backend (gptel-get-backend "Copilot")
+            gptel-magit-model 'claude-sonnet-4.6))
   (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
-        (setq gptel-magit-model 'qwen3.5-4b)))
+      (setq gptel-magit-backend (gptel-get-backend "llama-swap")
+            gptel-magit-model 'qwen3.5-4b)))
 #+end_src
 
 *** Code completion
