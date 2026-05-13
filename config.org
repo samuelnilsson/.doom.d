@@ -342,7 +342,7 @@ Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilo
     (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
         (progn
           (setq-local gptel-backend (gptel-get-backend "llama-swap"))
-          (setq-local gptel-model 'qwen3.5-4b)))
+          (setq-local gptel-model 'qwen3.5-9b)))
     (setq-local gptel-system
                 "You are a crisp technical writer. Output clean Markdown with short sections, bullet lists, and examples. Prefer active voice."))
   
@@ -354,7 +354,7 @@ Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilo
     (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
         (progn
           (setq-local gptel-backend (gptel-get-backend "llama-swap"))
-          (setq-local gptel-model 'qwen3.5-4b)))
+          (setq-local gptel-model 'qwen3.5-9b)))
     (setq-local gptel-system
                 "You are a careful programmer. Show minimal runnable code with comments. Note assumptions, complexity, and edge cases. Provide tests when useful."))
 
@@ -374,16 +374,18 @@ Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilo
         (gptel-make-gh-copilot "Copilot")
         (require 'gptel-integrations)))
   (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
+      (progn
         (gptel-make-openai "llama-swap"
-            :host "localhost:8080"
+            :host (concat (getenv "DOOM_LLAMA_HOST") ":8080")
             :protocol "http"
             :stream t
-            :models '(qwen3.5-4b)))
+            :models '(qwen3.5-35b qwen3.5-9b))
+        (require 'gptel-integrations)))
   (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
       (setq gptel-model 'claude-sonnet-4.6
             gptel-backend (gptel-get-backend "Copilot")))
   (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
-      (setq gptel-model 'qwen3.5-4b
+      (setq gptel-model 'qwen3.5-9b
             gptel-backend (gptel-get-backend "llama-swap"))))
 #+end_src
 
