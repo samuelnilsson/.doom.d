@@ -403,6 +403,8 @@ require network access and credentials only available on that machine.
                                    :args ("-y" "mcp-remote@latest" "https://learn.microsoft.com/api/mcp")))
              ("pdf-reader" . (:command "npx"
                               :args ("@sylphx/pdf-reader-mcp")))
+             ("nixos" . (:command "nix"
+                              :args ("run", "github:utensils/mcp-nixos")))
              ,@(when (string-equal (getenv "DOOM_GPTEL_MAC") "t")
                  `(("atlassian-rovo" . (:command "npx"
                                         :args ("-y" "mcp-remote@latest" "https://mcp.atlassian.com/v1/mcp")))
