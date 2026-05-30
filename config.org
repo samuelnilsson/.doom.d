@@ -490,11 +490,28 @@ the tool/agent definition files bundled with the package.
 Use =M-x gptel-agent= to open a dedicated agent session, or include =@gptel-agent=
 in any prompt to invoke it inline.
 
+Add project-specific agents directory if in a project.
+
 #+begin_src emacs-lisp :tangle yes
 (use-package! gptel-agent
-  :after gptel
+  :after gptel project
   :config
   (gptel-agent-update))
+
+;; Add project-specific agents directory when entering a project
+(defun my/gptel-agent-add-project-dirs ()
+  "Add project-specific .gptel-agents directory if it exists."
+  (when-let ((project (project-current)))
+    (let ((project-agents (expand-file-name ".gptel-agents" (project-root project))))
+      (when (and project-agents (file-exists-p project-agents)
+                 (not (member project-agents gptel-agent-dirs)))
+        (add-to-list 'gptel-agent-dirs project-agents)))))
+
+(add-hook 'project-switch-hook #'my/gptel-agent-add-project-dirs)
+
+;; Add global skills directory for git-commit skill (last to prioritize)
+(setq gptel-agent-skill-dirs
+      (append gptel-agent-skill-dirs '("~/.doom.d/global-skills/")))
 #+end_src
 
 *** Generate git commit messages
