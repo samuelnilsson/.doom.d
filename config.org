@@ -508,6 +508,44 @@ Use =gptel-magit= to generate commit messages from the staged diff. The default 
   (minuet-set-optional-options minuet-openai-fim-compatible-options :thinking nil))
 #+end_src
 
+* Pomodoro
+
+A simple pomodoro timer using =org-timer=. Start a 25-minute work session
+with =SPC o p=, take a 5-minute short break with =SPC o P=, or stop the
+current timer with =SPC o s=.
+
+#+begin_src emacs-lisp :tangle yes
+(defvar pomodoro-work-minutes 25)
+(defvar pomodoro-short-break-minutes 5)
+(defvar pomodoro-long-break-minutes 15)
+
+(defun pomodoro-start-work ()
+  "Start a pomodoro work session."
+  (interactive)
+  (org-timer-set-timer pomodoro-work-minutes)
+  (message "Pomodoro started: %d minutes of work. Focus!" pomodoro-work-minutes))
+
+(defun pomodoro-short-break ()
+  "Start a short pomodoro break."
+  (interactive)
+  (org-timer-set-timer pomodoro-short-break-minutes)
+  (message "Short break: %d minutes. Relax!" pomodoro-short-break-minutes))
+
+(defun pomodoro-long-break ()
+  "Start a long pomodoro break."
+  (interactive)
+  (org-timer-set-timer pomodoro-long-break-minutes)
+  (message "Long break: %d minutes. You earned it!" pomodoro-long-break-minutes))
+
+(map! :leader
+      (:prefix ("o p" . "pomodoro")
+       :desc "Start work session"  "w" #'pomodoro-start-work
+       :desc "Short break"         "s" #'pomodoro-short-break
+       :desc "Long break"          "l" #'pomodoro-long-break
+       :desc "Stop timer"          "q" #'org-timer-stop
+       :desc "Pause/resume timer"  "p" #'org-timer-pause-or-continue))
+#+end_src
+
 * Other
 
 ** Revert buffer automatically
