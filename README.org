@@ -1,0 +1,34 @@
+#+title: .doom.d
+
+Personal [[https://github.com/doomemacs/doomemacs][Doom Emacs]] configuration.
+
+* Structure
+
+- ~init.el~ :: Declares which Doom modules are enabled.
+- ~config.org~ :: Literate configuration, tangled into ~config.el~. This is
+  where most customizations live, organized by topic (UI, org-mode, keybindings,
+  tools, etc.).
+- ~packages.el~ :: Additional packages installed on top of Doom's defaults.
+
+* Usage
+
+This repository is meant to be cloned to ~/.doom.d/ (or ~/.config/doom/,
+depending on Doom Emacs version):
+
+#+begin_src sh
+git clone https://github.com/samuelnilsson/.doom.d.git ~/.doom.d
+#+end_src
+
+After cloning or making changes to ~init.el~ or ~packages.el~, run:
+
+#+begin_src sh
+doom sync
+#+end_src
+
+Changes to ~config.org~ are tangled to ~config.el~ automatically on save
+(via org-babel), or manually with =SPC m b t= / =org-babel-tangle=.
+
+* Contributing
+
+See [[file:AGENTS.md][AGENTS.md]] for conventions used in this repository (e.g. commit message
+format).
