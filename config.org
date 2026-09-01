@@ -322,6 +322,51 @@ Setting /copilot-version/ to /nil/ makes copilot.el use the Microsoft official l
         ("TAB" . 'copilot-accept-completion)))
 #+end_src
 
+** Eca
+
+[[https://github.com/editor-code-assistant/eca][ECA (Editor Code Assistant)]] is an editor-agnostic AI pair-programming
+tool. =eca-emacs= connects to the =eca= server to provide chat, code
+suggestions and context management directly from Emacs.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package! eca)
+
+(map! :leader
+      (:prefix ("o e" . "eca")
+       :desc "Start/open chat"     "e" #'eca
+       :desc "Toggle chat window"  "t" #'eca-chat-toggle-window
+       :desc "New chat"            "n" #'eca-chat-new
+       :desc "Stop"                "s" #'eca-stop
+       :desc "Restart"             "r" #'eca-restart
+
+       (:prefix ("c" . "context")
+        :desc "Add to user prompt"   "c" #'eca-chat-add-context-to-user-prompt
+        :desc "Add to system prompt" "s" #'eca-chat-add-context-to-system-prompt)))
+#+end_src
+
+*** Llama-swap provider
+
+Register llama-swap as a custom eca provider, using the same host logic as
+the gptel setup above: =localhost= on *DOOM_GPTEL_MAC*, or *DOOM_LLAMA_HOST*
+on *DOOM_GPTEL_HOME*. The =eca= server reads its config from the
+*ECA_CONFIG* environment variable, merging it with any config file, so it
+can be set here without a separate JSON file.
+
+#+begin_src emacs-lisp :tangle yes
+(let ((llama-swap-host
+       (cond ((string-equal (getenv "DOOM_GPTEL_MAC") "t") "localhost")
+             ((string-equal (getenv "DOOM_GPTEL_HOME") "t") (getenv "DOOM_LLAMA_HOST")))))
+  (when llama-swap-host
+    (setenv "ECA_CONFIG"
+            (json-encode
+             `(("providers" .
+                (("llama-swap" .
+                  (("api" . "openai-chat")
+                   ("url" . ,(concat "http://" llama-swap-host ":8080/v1"))
+                   ("models" . (("qwen3.5-9b" . ,(make-hash-table))
+                                ("qwen3.5-35b" . ,(make-hash-table)))))))))))))
+#+end_src
+
 ** Gptel
 
 *** Backends and models
