@@ -162,8 +162,8 @@ Use org-super-agenda to put the most important TODO items in groups.
           (:name "In progress"
            :todo "PROG"
            :order 3)
-          (:name "Due upcoming week"
-           :deadline (before ,(org-read-date nil nil "+1w"))
+          (:name "Due upcoming sprint"
+           :deadline (before ,(org-read-date nil nil "+2w"))
            :order 4)
           (:name "Next up"
            :take (7 (:and (:todo "TODO"
