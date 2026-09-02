@@ -305,23 +305,6 @@ Use xml-mode for "project files".
 #+end_src
 
 * AI
-** Completion
-
-Enable copilot when enabled by the environment variable *DOOM_COPILOT_ENABLE*.
-Remap tab to prioritize copilot over /corfu/ completion.
-
-Setting /copilot-version/ to /nil/ makes copilot.el use the Microsoft official language server protocol for copilot.
-
-#+begin_src emacs-lisp
-(use-package! copilot
-  :if (string-equal (getenv "DOOM_COPILOT_ENABLE") "t")
-  :hook (csharp-ts-mode . copilot-mode)
-  :config (setq copilot-version nil)
-  :bind (:map copilot-completion-map
-        ("<tab>" . 'copilot-accept-completion)
-        ("TAB" . 'copilot-accept-completion)))
-#+end_src
-
 ** Eca
 
 [[https://github.com/editor-code-assistant/eca][ECA (Editor Code Assistant)]] is an editor-agnostic AI pair-programming
