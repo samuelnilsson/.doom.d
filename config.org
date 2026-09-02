@@ -350,7 +350,8 @@ can be set here without a separate JSON file.
               (("api" . "openai-chat")
                ("url" . ,(concat "http://" llama-swap-host ":8080/v1"))
                ("models" . (("qwen3.5-9b" . ,(make-hash-table))
-                            ("qwen3.5-35b" . ,(make-hash-table))))))))
+                            ("qwen3.5-35b" . ,(make-hash-table))
+                            ("qwen3-coder-next" . ,(make-hash-table))))))))
          (when work-p
            `(("github-copilot" .
               (("models" .
