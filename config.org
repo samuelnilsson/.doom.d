@@ -334,7 +334,7 @@ the gptel setup above: =localhost= on *DOOM_GPTEL_MAC*, or *DOOM_LLAMA_HOST*
 on *DOOM_GPTEL_HOME*. On *DOOM_GPTEL_MAC* (work), also default to GitHub
 Copilot's Claude Sonnet 5, overriding its reported context length to 1M
 tokens (=context_length=); on *DOOM_GPTEL_HOME*, default to llama-swap's
-=qwen3.5-35b= instead. The =eca= server reads its config from the
+=qwen3.8-27b= instead. The =eca= server reads its config from the
 *ECA_CONFIG* environment variable, merging it with any config file, so it
 can be set here without a separate JSON file.
 
@@ -350,8 +350,7 @@ can be set here without a separate JSON file.
               (("api" . "openai-chat")
                ("url" . ,(concat "http://" llama-swap-host ":8080/v1"))
                ("models" . (("qwen3.5-9b" . ,(make-hash-table))
-                            ("qwen3.5-35b" . ,(make-hash-table))
-                            ("qwen3-coder-next" . ,(make-hash-table))))))))
+                            ("qwen3.8-27b" . ,(make-hash-table))))))))
          (when work-p
            `(("github-copilot" .
               (("models" .
@@ -360,7 +359,7 @@ can be set here without a separate JSON file.
         (append
          (when providers `(("providers" . ,providers)))
          (cond (work-p `(("defaultModel" . "github-copilot/claude-sonnet-5")))
-               (llama-swap-host `(("defaultModel" . "llama-swap/qwen3.5-35b")))))))
+               (llama-swap-host `(("defaultModel" . "llama-swap/qwen3.8-27b")))))))
   (when config
     (setenv "ECA_CONFIG" (json-encode config))))
 #+end_src
@@ -411,7 +410,7 @@ Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilo
           :host "localhost:8080"
           :protocol "http"
           :stream t
-          :models '(qwen3.5-35b qwen3.5-9b))
+          :models '(qwen3.8-27b qwen3.5-9b))
         (gptel-make-gh-copilot "Copilot")
         (require 'gptel-integrations)))
   (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
@@ -420,7 +419,7 @@ Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilo
             :host (concat (getenv "DOOM_LLAMA_HOST") ":8080")
             :protocol "http"
             :stream t
-            :models '(qwen3.5-35b qwen3.5-9b))
+            :models '(qwen3.8-27b qwen3.5-9b))
         (require 'gptel-integrations)))
   (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
       (setq gptel-model 'claude-sonnet-4.6
