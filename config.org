@@ -327,43 +327,6 @@ suggestions and context management directly from Emacs.
         :desc "Add to system prompt" "s" #'eca-chat-add-context-to-system-prompt)))
 #+end_src
 
-*** Providers
-
-Register llama-swap as a custom eca provider, using the same host logic as
-the gptel setup above: =localhost= on *DOOM_GPTEL_MAC*, or *DOOM_LLAMA_HOST*
-on *DOOM_GPTEL_HOME*. On *DOOM_GPTEL_MAC* (work), also default to GitHub
-Copilot's Claude Sonnet 5, overriding its reported context length to 1M
-tokens (=context_length=); on *DOOM_GPTEL_HOME*, default to llama-swap's
-=qwen3.8-27b= instead. The =eca= server reads its config from the
-*ECA_CONFIG* environment variable, merging it with any config file, so it
-can be set here without a separate JSON file.
-
-#+begin_src emacs-lisp :tangle yes
-(let* ((work-p (string-equal (getenv "DOOM_GPTEL_MAC") "t"))
-       (llama-swap-host
-        (cond (work-p "localhost")
-              ((string-equal (getenv "DOOM_GPTEL_HOME") "t") (getenv "DOOM_LLAMA_HOST"))))
-       (providers
-        (append
-         (when llama-swap-host
-           `(("llama-swap" .
-              (("api" . "openai-chat")
-               ("url" . ,(concat "http://" llama-swap-host ":8080/v1"))
-               ("models" . (("qwen3.5-9b" . ,(make-hash-table))
-                            ("qwen3.8-27b" . ,(make-hash-table))))))))
-         (when work-p
-           `(("github-copilot" .
-              (("models" .
-                (("claude-sonnet-5" . (("context_length" . 1000000)))))))))))
-       (config
-        (append
-         (when providers `(("providers" . ,providers)))
-         (cond (work-p `(("defaultModel" . "github-copilot/claude-sonnet-5")))
-               (llama-swap-host `(("defaultModel" . "llama-swap/qwen3.8-27b")))))))
-  (when config
-    (setenv "ECA_CONFIG" (json-encode config))))
-#+end_src
-
 ** Gptel
 
 *** Backends and models
