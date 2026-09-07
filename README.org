@@ -28,6 +28,43 @@ doom sync
 Changes to ~config.org~ are tangled to ~config.el~ automatically on save
 (via org-babel), or manually with =SPC m b t= / =org-babel-tangle=.
 
+* Nix flake / home-manager module
+
+This repository is also a Nix flake exposing a home-manager module, inspired by
+[[https://github.com/sebnyberg/doomemacs-nix-example][sebnyberg/doomemacs-nix-example]].
+
+- ~home.nix~ :: A home-manager module (=programs.doomEmacs.enable=) that
+  builds Emacs (native comp + vterm), tree-sitter grammars, hunspell
+  dictionaries, wires up ~$DOOMDIR~, ~$EMACSDIR~, ~$DOOMLOCALDIR~,
+  ~$DOOMPROFILELOADFILE~, and symlinks ~init.el~/~config.el~/~packages.el~
+  from this repo as well as the Doom Emacs source itself.
+- ~flake.nix~ :: Exposes ~homeManagerModules.default~ for importing into
+  another home-manager configuration (works on any system: macOS/aarch64,
+  macOS/x86_64, or Linux).
+
+** Usage
+
+Import the module from another home-manager configuration:
+
+#+begin_src nix
+{
+  inputs.doom-emacs.url = "path:/Users/sarz/.doom.d"; # or a git URL
+
+  # ... inside your home-manager module list:
+  imports = [ inputs.doom-emacs.homeManagerModules.default ];
+  programs.doomEmacs.enable = true;
+}
+#+end_src
+
+After building/switching, restart your shell (or source
+~~/.nix-profile/etc/profile.d/hm-session-vars.sh~) so that ~$DOOMDIR~,
+~$EMACSDIR~, and ~$PATH~ are set correctly, then run:
+
+#+begin_src sh
+doom install   # first time only
+doom sync      # whenever config or dependencies change
+#+end_src
+
 * Contributing
 
 See [[file:AGENTS.md][AGENTS.md]] for conventions used in this repository (e.g. commit message
