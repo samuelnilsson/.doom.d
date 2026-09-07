@@ -1,0 +1,2 @@
+default:
+  model: llama-swap/qwen3.5-9b
