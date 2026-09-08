@@ -84,6 +84,19 @@ let
     url = "https://github.com/doomemacs/doomemacs.git";
     rev = "01d68aaf6bd7db073365385cd82e1ad7e815295c";
   };
+
+  tex = pkgs.texliveSmall.withPackages (
+    ps: with ps; [
+      scheme-medium
+      dvisvgm
+      dvipng
+      wrapfig
+      amsmath
+      ulem
+      hyperref
+      capt-of
+    ]
+  );
 in
 {
   options.programs.doomEmacs = {
@@ -120,6 +133,22 @@ in
       hunspell
       ripgrep
       fd
+      nerd-fonts.symbols-only
+      noto-fonts-monochrome-emoji
+      tree
+      pandoc
+      postgresql
+      tex
+      mermaid-cli
+      copilot-language-server
+      netcoredbg
+      bash-language-server
+      dockerfile-language-server
+      yaml-language-server
+      vscode-json-languageserver
+      sqlite
+      wordnet
+      prettier
     ];
   };
 }
