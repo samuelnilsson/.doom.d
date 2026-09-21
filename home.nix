@@ -123,7 +123,7 @@ in
     xdg.configFile."doom".source = pkgs.runCommand "doom-config" { } ''
       mkdir -p $out
       cp ${./init.el} $out/init.el
-      cp ${./config.el} $out/config.el
+      cp ${./config.org} $out/config.org
       cp ${./packages.el} $out/packages.el
     '';
 
