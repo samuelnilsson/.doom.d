@@ -313,7 +313,11 @@ Use xml-mode for "project files".
 #+begin_src emacs-lisp :tangle yes
 (use-package! agent-shell
   :config
-  (setq agent-shell-preferred-agent-config 'opencode))
+  (setq agent-shell-preferred-agent-config 'opencode
+        agent-shell-mcp-servers
+        '(((name . "nixos")
+           (command . "nix")
+           (args . ("run" "github:utensils/mcp-nixos" "--"))))))
 
 (map! :leader
       (:prefix ("o e" . "agent-shell")
