@@ -305,26 +305,22 @@ Use xml-mode for "project files".
 #+end_src
 
 * AI
-** Eca
+** Agent shell
 
-[[https://github.com/editor-code-assistant/eca][ECA (Editor Code Assistant)]] is an editor-agnostic AI pair-programming
-tool. =eca-emacs= connects to the =eca= server to provide chat, code
-suggestions and context management directly from Emacs.
+[[https://github.com/xenodium/agent-shell][agent-shell]] is a native Emacs buffer for interacting with LLM agents
+(Claude Code, Copilot, Gemini, ...) powered by the Agent Client Protocol.
 
 #+begin_src emacs-lisp :tangle yes
-(use-package! eca)
+(use-package! agent-shell
+  :config
+  (setq agent-shell-preferred-agent-config 'opencode))
 
 (map! :leader
-      (:prefix ("o e" . "eca")
-       :desc "Start/open chat"     "e" #'eca
-       :desc "Toggle chat window"  "t" #'eca-chat-toggle-window
-       :desc "New chat"            "n" #'eca-chat-new
-       :desc "Stop"                "s" #'eca-stop
-       :desc "Restart"             "r" #'eca-restart
-
-       (:prefix ("c" . "context")
-        :desc "Add to user prompt"   "c" #'eca-chat-add-context-to-user-prompt
-        :desc "Add to system prompt" "s" #'eca-chat-add-context-to-system-prompt)))
+      (:prefix ("o e" . "agent-shell")
+       :desc "Start/open agent shell" "e" #'agent-shell
+       :desc "New agent shell"        "n" #'agent-shell-new-shell
+       :desc "Toggle agent shell"     "t" #'agent-shell-toggle
+       :desc "Send file"              "s" #'agent-shell-send-file))
 #+end_src
 
 ** Gptel

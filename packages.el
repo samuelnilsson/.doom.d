@@ -1,6 +1,5 @@
 (package! verb)
-(package! eca
-  :recipe (:host github :repo "editor-code-assistant/eca-emacs" :files ("*.el")))
+(package! agent-shell)
 (package! guess-language)
 (package! mermaid-mode)
 (package! mermaid-ts-mode)
