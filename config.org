@@ -316,8 +316,8 @@ Use xml-mode for "project files".
   (setq agent-shell-preferred-agent-config 'opencode
         agent-shell-mcp-servers
         '(((name . "nixos")
-           (command . "nix")
-           (args . ("run" "github:utensils/mcp-nixos" "--"))))))
+           (command . "mcp-nixos")
+           (args . [])))))
 
 (map! :leader
       (:prefix ("o e" . "agent-shell")
