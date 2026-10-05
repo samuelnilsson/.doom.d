@@ -311,6 +311,8 @@ Use xml-mode for "project files".
 (Claude Code, Copilot, Gemini, ...) powered by the Agent Client Protocol.
 
 #+begin_src emacs-lisp :tangle yes
+(require 'agent-shell)
+
 (use-package! agent-shell
   :config
   (setq agent-shell-preferred-agent-config 'opencode
@@ -324,7 +326,15 @@ Use xml-mode for "project files".
        :desc "Start/open agent shell" "e" #'agent-shell
        :desc "New agent shell"        "n" #'agent-shell-new-shell
        :desc "Toggle agent shell"     "t" #'agent-shell-toggle
-       :desc "Send file"              "s" #'agent-shell-send-file))
+        :desc "Send file"              "s" #'agent-shell-send-file))
+
+(map! :map agent-shell-mode-map
+      :desc "Submit prompt"   (kbd "<leader> m s") #'shell-maker-submit
+      :desc "Interrupt"       (kbd "<leader> m i") #'agent-shell-interrupt
+      :desc "Scroll up"       (kbd "<leader> m n") #'scroll-up
+      :desc "Scroll down"     (kbd "<leader> m p") #'scroll-down
+      :desc "Clear output"    (kbd "<leader> m l") #'agent-shell-clear-output
+      :desc "Kill shell"      (kbd "<leader> m k") #'agent-shell-kill-buffer)
 #+end_src
 
 ** Gptel
