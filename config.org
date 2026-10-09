@@ -356,7 +356,7 @@ Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilo
     (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
         (progn
           (setq-local gptel-backend (gptel-get-backend "llama-swap"))
-          (setq-local gptel-model 'qwen3.5-9b)))
+          (setq-local gptel-model 'glm-4.7-flash)))
     (setq-local gptel-system
                 "You are a crisp technical writer. Output clean Markdown with short sections, bullet lists, and examples. Prefer active voice."))
   
@@ -368,7 +368,7 @@ Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilo
     (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
         (progn
           (setq-local gptel-backend (gptel-get-backend "llama-swap"))
-          (setq-local gptel-model 'qwen3.5-9b)))
+          (setq-local gptel-model 'glm-4.7-flash)))
     (setq-local gptel-system
                 "You are a careful programmer. Show minimal runnable code with comments. Note assumptions, complexity, and edge cases. Provide tests when useful."))
 
@@ -384,7 +384,7 @@ Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilo
           :host "localhost:8080"
           :protocol "http"
           :stream t
-          :models '(qwen3.8-27b qwen3.5-9b))
+          :models '(qwen3.6-35b-a3b qwen3.5-9b glm-4.7-flash))
         (gptel-make-gh-copilot "Copilot")
         (require 'gptel-integrations)))
   (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
@@ -393,41 +393,14 @@ Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilo
             :host (concat (getenv "DOOM_LLAMA_HOST") ":8080")
             :protocol "http"
             :stream t
-            :models '(qwen3.8-27b qwen3.5-9b))
+            :models '(qwen3.6-35b-a3b qwen3.5-9b glm-4.7-flash))
         (require 'gptel-integrations)))
   (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
       (setq gptel-model 'claude-sonnet-4.6
             gptel-backend (gptel-get-backend "Copilot")))
   (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
-      (setq gptel-model 'qwen3.5-9b
+      (setq gptel-model 'glm-4.7-flash
             gptel-backend (gptel-get-backend "llama-swap"))))
-#+end_src
-
-*** Mcp servers
-
-Configure MCP servers for gptel tool use. =microsoft-learn= provides access to official
-Microsoft documentation. =pdf-reader= enables reading and extracting content from PDF files.
-=atlassian-rovo= and =github= are only registered when =DOOM_GPTEL_MAC= is set, as they
-require network access and credentials only available on that machine.
-
-#+begin_src emacs-lisp :tangle yes
-(use-package mcp
-  :ensure t
-  :after gptel
-  :custom (mcp-hub-servers
-           `(("microsoft-learn" . (:command "npx"
-                                   :args ("-y" "mcp-remote@latest" "https://learn.microsoft.com/api/mcp")))
-             ("pdf-reader" . (:command "npx"
-                              :args ("@sylphx/pdf-reader-mcp")))
-             ("nixos" . (:command "nix"
-                              :args ("run", "github:utensils/mcp-nixos")))
-             ,@(when (string-equal (getenv "DOOM_GPTEL_MAC") "t")
-                 `(("atlassian-rovo" . (:command "npx"
-                                        :args ("-y" "mcp-remote@latest" "https://mcp.atlassian.com/v1/mcp")))
-                   ("github" . (:command "npx"
-                                :args ("-y" "mcp-remote@latest" "https://api.githubcopilot.com/mcp" "--header" ,(concat "Authorization: Bearer " (string-trim (shell-command-to-string "gh auth token"))))))))))
-  :config (require 'mcp-hub)
- :hook (after-init . mcp-hub-start-all-server))
 #+end_src
 
 *** Key mappings
@@ -503,7 +476,7 @@ Use =gptel-magit= to generate commit messages from the staged diff. The default 
             gptel-magit-model 'claude-sonnet-4.6))
   (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
       (setq gptel-magit-backend (gptel-get-backend "llama-swap")
-            gptel-magit-model 'qwen3.5-4b)))
+            gptel-magit-model 'qwen3.5-9b)))
 #+end_src
 
 *** Code completion
@@ -534,7 +507,7 @@ Use =gptel-magit= to generate commit messages from the staged diff. The default 
   (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
       (plist-put minuet-openai-fim-compatible-options :model "qwen3.5-9b"))
   (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
-      (plist-put minuet-openai-fim-compatible-options :model "qwen3.5-4b"))
+      (plist-put minuet-openai-fim-compatible-options :model "qwen3.5-9b"))
   (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 56)
   (minuet-set-optional-options minuet-openai-fim-compatible-options :thinking nil))
 #+end_src
