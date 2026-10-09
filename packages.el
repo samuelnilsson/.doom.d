@@ -8,12 +8,10 @@
 (unless (string= "" (getenv "DOOM_CALDAV_SERVER"))
   (package! org-caldav))
 (package! gptel :recipe (:nonrecursive t))
-(package! mcp)
 (package! catppuccin-theme)
 (package! mpv)
 (package! elfeed-tube-mpv)
 (package! gptel-magit)
-(package! gptel-agent)
 (package! minuet)
 (package! mcp-server
   :recipe (:type git :host github :repo "rhblind/emacs-mcp-server"
