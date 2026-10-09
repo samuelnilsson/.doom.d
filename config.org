@@ -334,7 +334,8 @@ Use xml-mode for "project files".
       :desc "Scroll up"       (kbd "<leader> m n") #'scroll-up
       :desc "Scroll down"     (kbd "<leader> m p") #'scroll-down
       :desc "Clear output"    (kbd "<leader> m l") #'agent-shell-clear-output
-      :desc "Kill shell"      (kbd "<leader> m k") #'agent-shell-kill-buffer)
+      :desc "Kill shell"      (kbd "<leader> m k") #'agent-shell-kill-buffer
+      :desc "Send file"       (kbd "<leader> m f") #'agent-shell-send-file)
 #+end_src
 
 ** Gptel
@@ -655,4 +656,10 @@ Most commit messages are longer than the default 50.
 
 #+begin_src emacs-lisp :tangle yes
 (setq git-commit-summary-max-length 100)
+#+end_src
+
+** MCP Server
+
+#+begin_src emacs-lisp :tangle yes
+(add-hook 'emacs-startup-hook #'mcp-server-start-unix)
 #+end_src

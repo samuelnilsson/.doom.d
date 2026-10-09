@@ -15,3 +15,6 @@
 (package! gptel-magit)
 (package! gptel-agent)
 (package! minuet)
+(package! mcp-server
+  :recipe (:type git :host github :repo "rhblind/emacs-mcp-server"
+           :files ("*.el" "tools/*.el" "mcp-wrapper.py" "mcp-wrapper.sh")))
