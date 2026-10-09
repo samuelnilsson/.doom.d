@@ -352,7 +352,7 @@ Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilo
     (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
         (progn
           (setq-local gptel-backend (gptel-get-backend "Copilot"))
-          (setq-local gptel-model 'claude-sonnet-4.6)))
+          (setq-local gptel-model 'claude-haiku-5.5)))
     (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
         (progn
           (setq-local gptel-backend (gptel-get-backend "llama-swap"))
@@ -364,7 +364,7 @@ Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilo
     (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
         (progn
           (setq-local gptel-backend (gptel-get-backend "Copilot"))
-          (setq-local gptel-model 'claude-sonnet-4.6)))
+          (setq-local gptel-model 'claude-haiku-5.5)))
     (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
         (progn
           (setq-local gptel-backend (gptel-get-backend "llama-swap"))
@@ -396,7 +396,7 @@ Use gptel to interact with llama-swap language models. On Mac, use GitHub Copilo
             :models '(qwen3.6-35b-a3b qwen3.5-9b glm-4.7-flash))
         (require 'gptel-integrations)))
   (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
-      (setq gptel-model 'claude-sonnet-4.6
+      (setq gptel-model 'claude-haiku-5.5
             gptel-backend (gptel-get-backend "Copilot")))
   (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
       (setq gptel-model 'glm-4.7-flash
@@ -436,7 +436,7 @@ Use =gptel-magit= to generate commit messages from the staged diff. The default 
         (replace-regexp-in-string "60 characters" "100 characters" gptel-magit-prompt-conventional-commits))
   (if (string-equal (getenv "DOOM_GPTEL_MAC") "t")
       (setq gptel-magit-backend (gptel-get-backend "Copilot")
-            gptel-magit-model 'claude-sonnet-4.6))
+            gptel-magit-model 'claude-haiku-5.5))
   (if (string-equal (getenv "DOOM_GPTEL_HOME") "t")
       (setq gptel-magit-backend (gptel-get-backend "llama-swap")
             gptel-magit-model 'qwen3.5-9b)))
