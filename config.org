@@ -482,9 +482,9 @@ Add project-specific agents directory if in a project.
 
 (add-hook 'project-switch-hook #'my/gptel-agent-add-project-dirs)
 
-;; Add global skills directory for git-commit skill (last to prioritize)
+;; Add skills directory (last to prioritize)
 (setq gptel-agent-skill-dirs
-      (append gptel-agent-skill-dirs '("~/.doom.d/global-skills/")))
+      (append gptel-agent-skill-dirs '("~/.doom.d/.agents/skills/")))
 #+end_src
 
 *** Generate git commit messages
