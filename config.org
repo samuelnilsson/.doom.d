@@ -325,7 +325,8 @@ Use xml-mode for "project files".
       (:prefix ("o e" . "agent-shell")
        :desc "Start/open agent shell" "e" #'agent-shell
        :desc "New agent shell"        "n" #'agent-shell-new-shell
-       :desc "Toggle agent shell"     "t" #'agent-shell-toggle
+        :desc "Toggle agent shell"     "t" #'agent-shell-toggle
+        :desc "Switch agent buffer"    "b" #'agent-shell-switch-buffer
         :desc "Send file"              "s" #'agent-shell-send-file))
 
 (map! :map agent-shell-mode-map
