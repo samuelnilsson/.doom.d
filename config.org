@@ -329,13 +329,13 @@ Use xml-mode for "project files".
         :desc "Send file"              "s" #'agent-shell-send-file))
 
 (map! :map agent-shell-mode-map
-      :desc "Submit prompt"   (kbd "<leader> m s") #'shell-maker-submit
-      :desc "Interrupt"       (kbd "<leader> m i") #'agent-shell-interrupt
-      :desc "Scroll up"       (kbd "<leader> m n") #'scroll-up
-      :desc "Scroll down"     (kbd "<leader> m p") #'scroll-down
-      :desc "Clear output"    (kbd "<leader> m l") #'agent-shell-clear-output
-      :desc "Kill shell"      (kbd "<leader> m k") #'agent-shell-kill-buffer
-      :desc "Send file"       (kbd "<leader> m f") #'agent-shell-send-file)
+      :desc "Submit prompt"   "<leader> m s" #'shell-maker-submit
+      :desc "Interrupt"       "<leader> m i" #'agent-shell-interrupt
+      :desc "Scroll up"       "<leader> m n" #'scroll-up
+      :desc "Scroll down"     "<leader> m p" #'scroll-down
+      :desc "Clear output"    "<leader> m l" #'agent-shell-clear-output
+      :desc "Kill shell"      "<leader> m k" #'agent-shell-kill-buffer
+      :desc "Send file"       "<leader> m f" #'agent-shell-send-file)
 #+end_src
 
 ** Gptel
